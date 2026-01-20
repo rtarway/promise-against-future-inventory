@@ -14,22 +14,22 @@ AIPE uses a **LangGraph**-based Agent to evaluate inventory sources in a priorit
 ### Logical Architecture
 ```mermaid
 graph TD
-    User[User / Order System] -->|POST /allocate| API[FastAPI Endpoint]
-    API --> Agent[Promising Agent (LangGraph)]
+    User["User / Order System"] -->|POST /allocate| API["FastAPI Endpoint"]
+    API --> Agent["Promising Agent (LangGraph)"]
     
     subgraph "Decision Logic"
-        Agent --> Node1[Check Free Stock]
-        Agent --> Node2[Evaluate Safety Stock]
-        Agent --> Node3[Direct Inbound Promising]
+        Agent --> Node1["Check Free Stock"]
+        Agent --> Node2["Evaluate Safety Stock"]
+        Agent --> Node3["Direct Inbound Promising"]
     end
     
     subgraph "Inventory Interface (MCP)"
-        Node1 -->|Get Position| MCP[Inventory MCP Tool]
-        Node2 -->|Check ASNs / Rules| MCP
-        Node3 -->|Check ASNs| MCP
+        Node1 -->|"Get Position"| MCP["Inventory MCP Tool"]
+        Node2 -->|"Check ASNs / Rules"| MCP
+        Node3 -->|"Check ASNs"| MCP
     end
     
-    MCP -->|SQL/API| DB[(Inventory & Rules DB)]
+    MCP -->|"SQL/API"| DB[("Inventory & Rules DB")]
     
     style MCP fill:#f9f,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
 ```
