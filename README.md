@@ -80,17 +80,17 @@ See [deployment_guide.md](deployment_guide.md) for full details.
 ### Infrastructure Diagram
 ```mermaid
 graph LR
-    Client -->|HTTP| LB[Load Balancer / Ingress]
-    LB --> Svc[K8s Service: aipe]
+    Client -->|HTTP| LB["Load Balancer / Ingress"]
+    LB --> Svc["K8s Service: aipe"]
     
     subgraph "Kubernetes Cluster"
-        Svc --> Pod1[Pod: AIPE API]
-        Svc --> Pod2[Pod: AIPE API (Replica)]
+        Svc --> Pod1["Pod: AIPE API"]
+        Svc --> Pod2["Pod: AIPE API (Replica)"]
         
-        Pod1 -->|TCP 5432| DB_Svc[K8s Service: postgres]
-        Pod2 -->|TCP 5432| DB_Svc
+        Pod1 -->|"TCP 5432"| DB_Svc["K8s Service: postgres"]
+        Pod2 -->|"TCP 5432"| DB_Svc
         
-        DB_Svc --> DB_Pod[Pod: PostgreSQL]
+        DB_Svc --> DB_Pod["Pod: PostgreSQL"]
     end
 ```
 
