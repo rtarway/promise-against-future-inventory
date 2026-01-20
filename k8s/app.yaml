@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aipe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aipe
+  template:
+    metadata:
+      labels:
+        app: aipe
+    spec:
+      containers:
+      - name: aipe
+        image: aipe:latest
+        imagePullPolicy: Never # Use local image in Rancher
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://user:password@postgres:5432/supply_chain"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aipe
+spec:
+  selector:
+    app: aipe
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  type: LoadBalancer # Or NodePort for Rancher

@@ -1,0 +1,10 @@
+langgraph
+langchain
+pydantic
+mcp
+pytest
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+tomli
